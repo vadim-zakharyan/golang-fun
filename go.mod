@@ -1,2 +1,2 @@
-module main
+module GoFun
 go 1.16
