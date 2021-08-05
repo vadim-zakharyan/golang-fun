@@ -4,12 +4,13 @@ import (
 	"testing"
 )
 
-func Test_even(t *testing.T) {
+func TestOddEvenSum_even(t *testing.T) {
 	type args struct {
 		val int
 	}
 	tests := []struct {
 		name string
+		tr   OddEvenSum
 		args args
 		want bool
 	}{
@@ -26,19 +27,21 @@ func Test_even(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			if got := even(tt.args.val); got != tt.want {
-				t.Errorf("even() = %v, want %v", got, tt.want)
+			tr := OddEvenSum{}
+			if got := tr.even(tt.args.val); got != tt.want {
+				t.Errorf("OddEvenSum.even() = %v, want %v", got, tt.want)
 			}
 		})
 	}
 }
 
-func TestMagic(t *testing.T) {
+func TestOddEvenSum_magic(t *testing.T) {
 	type args struct {
 		numberList []int
 	}
 	tests := []struct {
 		name        string
+		tr          *OddEvenSum
 		args        args
 		wantSumEven int
 		wantSumOdd  int
@@ -52,12 +55,38 @@ func TestMagic(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			gotSumEven, gotSumOdd := magic(tt.args.numberList)
+			tr := &OddEvenSum{}
+			gotSumEven, gotSumOdd := tr.magic(tt.args.numberList)
 			if gotSumEven != tt.wantSumEven {
-				t.Errorf("Magic() gotSumEven = %v, want %v", gotSumEven, tt.wantSumEven)
+				t.Errorf("OddEvenSum.magic() gotSumEven = %v, want %v", gotSumEven, tt.wantSumEven)
 			}
 			if gotSumOdd != tt.wantSumOdd {
-				t.Errorf("Magic() gotSumOdd = %v, want %v", gotSumOdd, tt.wantSumOdd)
+				t.Errorf("OddEvenSum.magic() gotSumOdd = %v, want %v", gotSumOdd, tt.wantSumOdd)
+			}
+		})
+	}
+}
+
+func TestOddEvenSum_Run(t *testing.T) {
+	type args struct {
+		numberList []int
+	}
+	tests := []struct {
+		name string
+		args args
+		want string
+	}{
+		{
+			name: "",
+			args: args{[]int{1, 2, 3, 4, 5, 6, 7, 8, 9, 10}},
+			want: "For given slice : \t[1 2 3 4 5 6 7 8 9 10]\n\tSum of evens: \t30\n\tSum of odds: \t25",
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t1 *testing.T) {
+			tr := &OddEvenSum{}
+			if got := tr.Run(tt.args.numberList); got != tt.want {
+				t1.Errorf("Run() = %v, want %v", got, tt.want)
 			}
 		})
 	}
