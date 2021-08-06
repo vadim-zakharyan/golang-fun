@@ -18,6 +18,10 @@ func main() {
 	hasDuplicate := HasDuplicate{}
 	display(hasDuplicate.Run([]int{1, 2, 2}))
 	display(hasDuplicate.Run([]int{1, 2, 3}))
+
+	DisplayList()
+
+	DisplayTasks()
 }
 
 func display(value string) {
